@@ -1,65 +1,126 @@
-import Image from "next/image";
 
-export default function Home() {
+import type { Metadata } from "next";
+import SpendForm from "@/components/SpendForm";
+import { Badge } from "@/components/ui/badge";
+import { Zap, TrendingDown, Share2, ShieldCheck } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "AIAudit - Free AI Spend Audit for Startups",
+  description:
+    "Find out exactly where your team is overspending on AI tools. Free instant audit. No login required.",
+  openGraph: {
+    title: "AIAudit - Free AI Spend Audit for Startups",
+    description:
+      "Find out exactly where your team is overspending on AI tools. Free instant audit. No login required.",
+    type: "website",
+    images: [{ url: "/og-default.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AIAudit - Free AI Spend Audit for Startups",
+    description: "Find out exactly where your team is overspending on AI tools.",
+    images: ["/og-default.png"],
+  },
+};
+
+const FEATURES = [
+  {
+    icon: <TrendingDown size={18} className="text-primary" />,
+    title: "Instant savings estimate",
+    desc: "See exactly how much you could save - per tool, per month, per year.",
+  },
+  {
+    icon: <Zap size={18} className="text-primary" />,
+    title: "Smart recommendations",
+    desc: "Right-size plans, remove overlapping tools, and find cheaper alternatives.",
+  },
+  {
+    icon: <Share2 size={18} className="text-primary" />,
+    title: "Shareable audit report",
+    desc: "Get a unique URL to share your audit with your team or investors.",
+  },
+  {
+    icon: <ShieldCheck size={18} className="text-primary" />,
+    title: "No login required",
+    desc: "Just fill in your tools and get your report. Email optional, always after.",
+  },
+];
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="min-h-screen bg-background">
+      {/*Nav*/}
+      <nav className="border-b border-border bg-background/80 backdrop-blur sticky top-0 z-40">
+        <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
+          <div className="flex items-center gap-2 font-semibold text-lg tracking-tight">
+            <Zap size={20} className="text-primary" />
+            AIAudit
+          </div>
+          <Badge variant="secondary" className="text-xs">Free tool by Credex</Badge>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
+      </nav>
+
+      {/*Hero*/}
+      <section className="max-w-5xl mx-auto px-4 pt-16 pb-10 text-center">
+        <Badge className="mb-4 text-xs" variant="outline">
+          No signup · No credit card · Instant results
+        </Badge>
+        <h1 className="text-4xl sm:text-5xl font-bold tracking-tight leading-tight mb-4">
+          Are you overpaying for{" "}
+          <span className="text-primary">AI tools?</span>
+        </h1>
+        <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-6">
+          Enter your AI subscriptions and get an instant audit - where you're
+          overspending, what to switch, and your total potential savings.
+        </p>
+
+        {/* Social proof mocked for now. update with real numbers post-launch */}
+        <p className="text-sm text-muted-foreground">
+          <span className="font-medium text-foreground">1,200+ teams</span> audited ·
+          avg. savings{" "}
+          <span className="font-medium text-foreground">$340/mo</span>
+          {" "}· takes{" "}
+          <span className="font-medium text-foreground">2 minutes</span>
+        </p>
+      </section>
+
+      {/*Form*/}
+      <section className="max-w-3xl mx-auto px-4 pb-12">
+        <SpendForm />
+      </section>
+
+      {/*Feature highlights*/}
+      <section className="max-w-5xl mx-auto px-4 py-12 border-t border-border">
+        <h2 className="text-center text-sm font-semibold text-muted-foreground uppercase tracking-widest mb-8">
+          What you get
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {FEATURES.map((f) => (
+            <div key={f.title} className="flex flex-col gap-2">
+              <div className="flex items-center gap-2">
+                {f.icon}
+                <span className="font-medium text-sm">{f.title}</span>
+              </div>
+              <p className="text-sm text-muted-foreground">{f.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/*Footer*/}
+      <footer className="border-t border-border bg-muted/30">
+        <div className="max-w-5xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm text-muted-foreground">
+          <span>© {new Date().getFullYear()} AIAudit by Credex</span>
           <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+            href="https://credex.rocks"
             target="_blank"
             rel="noopener noreferrer"
+            className="hover:text-foreground transition-colors"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
+            credex.rocks →
           </a>
         </div>
-      </main>
-    </div>
+      </footer>
+    </main>
   );
 }

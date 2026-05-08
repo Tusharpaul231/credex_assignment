@@ -16,17 +16,17 @@ Last verification: 2025-05-07
 - Enterprise: $39/user/month - https://github.com/features/copilot#pricing
 
 ## Claude (Anthropic)
-- Free: $0/month
-- Pro: $20/month
-- Max (5x): $100/month
-- Team Standard: $25/user/month billed monthly (minimum 5 seats)
-- Team Standard Annual: $20/user/month billed annually
+- Free: $0/month - https://claude.ai/upgrade
+- Pro: $20/month - https://claude.ai/upgrade
+- Max (5x): $100/month - https://claude.ai/upgrade
+- Team Standard: $25/user/month billed monthly (minimum 5 seats) - https://claude.ai/upgrade
+- Team Standard Annual: $20/user/month billed annually - https://claude.ai/upgrade
 
 ## ChatGPT (OpenAI)
-- Free: $0/month
-- Plus: $20/month
-- Team: $30/user/month billed monthly
-- Team Annual: $25/user/month billed annually
+- Free: $0/month - https://openai.com/chatgpt/pricing
+- Plus: $20/month - https://openai.com/chatgpt/pricing
+- Team: $30/user/month billed monthly - https://openai.com/chatgpt/pricing
+- Team Annual: $25/user/month billed annually - https://openai.com/chatgpt/pricing
 
 ## Anthropic API
 - Pay-as-you-go - https://www.anthropic.com/pricing
@@ -41,3 +41,8 @@ Last verification: 2025-05-07
 ## Gemini (Google)
 - Gemini Advanced (Google One AI Premium): $19.99/month - https://one.google.com/about/ai-premium
 - Gemini API: Pay-as-you-go - https://ai.google.dev/pricing
+
+## Windsurf (Codeium)
+- Free: $0 - https://windsurf.com/pricing
+- Pro: $15/user/month - https://windsurf.com/pricing
+- Team: $35/user/month - https://windsurf.com/pricing

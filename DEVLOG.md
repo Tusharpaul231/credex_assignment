@@ -12,7 +12,7 @@
 **Plan for tomorrow:** Finalize pricing research from official vendor pages and start implementing the first version of the audit rule engine. Build the CI pipeline.
 
 
-## Day 2 — 2026-05-08
+## Day 2 - 2026-05-08
 **Hours worked:** 5
 
 **What I did:** Built the initial frontend interaction layer for the application. Implemented the main `SpendForm` component with support for multiple AI tools and dynamic rows. Created a reusable `ToolRow` component for handling individual tool inputs. Added `pricingData.ts`. Scaffolded the initial `/api/audit` route with a temporary mock response to validate frontend/backend flow. Also integrated the form into the landing page and cleaned up the root layout structure.
@@ -22,3 +22,15 @@
 **Blockers / what I'm stuck on:** The UI is still mostly unstyled and focused on functionality first. Need to decide how much pricing should be auto-calculated versus manually editable by users.
 
 **Plan for tomorrow:** Improve the form UX with proper styling using Tailwind + shadcn/ui, and start implementing the deterministic audit engine logic for generating savings recommendations the main part.
+
+
+## Day 3 - 2026-05-09
+**Hours worked:** 6.5
+
+**What I did:** Started implementing the core audit engine logic in `auditEngine.ts`. Set up the testing structure using Vitest and created the initial `tests/` directory for validating audit calculations and recommendation outputs. Also updated the Vitest configuration to support the current project structure and prepared the repository for automated test execution through GitHub Actions CI.
+
+**What I learned:** Separating pricing data from recommendation logic made the audit engine significantly easier to reason about. Writing tests early helped identify edge cases in savings calculations before integrating the logic into the UI.
+
+**Blockers / what I'm stuck on:** Still refining how aggressive the recommendation engine should be. Some optimization suggestions can feel too opinionated if the logic is too strict. Need to balance realistic savings opportunities with recommendations that users would actually trust.
+
+**Plan for tomorrow:** Integrate the audit engine with the frontend form submission flow, build the initial audit results UI, and start connecting the generated audit data to Supabase persistence.

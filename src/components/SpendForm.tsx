@@ -48,28 +48,25 @@ const DEFAULT_FORM: FormInput = {
 
 export default function SpendForm() {
   const router = useRouter();
-  const [form, setForm] = useState<FormInput>(DEFAULT_FORM);
+  //const [form, setForm] = useState<FormInput>(DEFAULT_FORM);
   const [loading, setLoading] = useState(false);
-  const [hydrated, setHydrated] = useState(false);
+  //const [hydrated, setHydrated] = useState(false);
 
   // Load persisted state on mount
-  useEffect(() => {
+  const [form, setForm] = useState<FormInput>(() => {
+    // Only runs on client, so check for window
+    if (typeof window === "undefined") return DEFAULT_FORM;
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsed: FormInput = JSON.parse(saved);
-        // Basic validation ensure tools array exists
-        if (parsed.tools && Array.isArray(parsed.tools)) {
-          setForm(parsed);
-        }
+        if (parsed.tools && Array.isArray(parsed.tools)) return parsed;
       }
-    } catch {
-      // Ignore parse errors, use defaults
-    }
-    setHydrated(true);
-  }, []);
+    } catch {}
+    return DEFAULT_FORM;
+  });
 
-  // Persist on every change
+  /* Persist on every change
   useEffect(() => {
     if (!hydrated) return;
     try {
@@ -77,7 +74,13 @@ export default function SpendForm() {
     } catch {
       // Storage full or unavailable silently ignore for now
     }
-  }, [form, hydrated]);
+  }, [form, hydrated]);*/
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(form));
+    } catch {}
+  }, [form]);
+
 
   // Handlers
 
@@ -167,7 +170,7 @@ export default function SpendForm() {
   const totalMonthly = form.tools.reduce((sum, t) => sum + (t.monthlySpend || 0), 0);
 
   // Don't render until localStorage is loaded to avoid hydration flash
-  if (!hydrated) return null;
+  //if (!hydrated) return null;
 
   return (
     <form onSubmit={handleSubmit} noValidate>
@@ -178,8 +181,8 @@ export default function SpendForm() {
             Your AI Tool Stack
           </CardTitle>
           <CardDescription>
-            Add every AI tool your team pays for. We'll calculate exactly where
-            you're overspending and what to do about it.
+            Add every AI tool your team pays for. We&apos;ll calculate exactly where
+            you&apos;re overspending and what to do about it.
           </CardDescription>
         </CardHeader>
 

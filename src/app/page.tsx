@@ -70,7 +70,7 @@ export default function HomePage() {
           <span className="text-primary">AI tools?</span>
         </h1>
         <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-6">
-          Enter your AI subscriptions and get an instant audit - where you're
+          Enter your AI subscriptions and get an instant audit - where you&apos;re
           overspending, what to switch, and your total potential savings.
         </p>
 

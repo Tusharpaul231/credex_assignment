@@ -34,3 +34,46 @@
 **Blockers / what I'm stuck on:** Still refining how aggressive the recommendation engine should be. Some optimization suggestions can feel too opinionated if the logic is too strict. Need to balance realistic savings opportunities with recommendations that users would actually trust.
 
 **Plan for tomorrow:** Integrate the audit engine with the frontend form submission flow, build the initial audit results UI, and start connecting the generated audit data to Supabase persistence.
+
+
+## Day 4  2026-05-10
+
+**Hours worked:** 6
+
+**What I did:**
+Built the entire results pipeline end to end. Set up Supabase with the audits
+and leads tables by running the schema SQL in the dashboard. Created two
+Supabase clients a browser client using the anon key and a server client
+using the service role key for API routes. Built the POST /api/audit route
+which runs the audit engine, calls an AI API for the personalised summary,
+saves the full audit to Supabase, and returns a nanoid. Built the shareable
+/audit/[id] results page with full styling  hero savings block, per-tool
+breakdown cards, Credex CTA for high-savings audits, AI summary section, lead
+capture form, and share button. Also built all the sub-components: HeroSavings,
+ToolAuditCard, CredexCTA, AISummary, ShareButton, and LeadCapture. Fixed a
+hydration error on the form by wrapping SpendForm in a client-only
+SpendFormWrapper using dynamic import with ssr: false. Wrote PROMPTS.md
+documenting the AI prompt, model choice, and fallback logic.
+
+**What I learned:**
+ssr: false in next/dynamic is not allowed inside Server Components it must
+live in a Client Component. Solved by creating a thin SpendFormWrapper with
+"use client" that handles the dynamic import. Also learned that Gemini 2.0
+Flash free tier has limit: 0 in India regardless of account  a regional
+restriction. Switched to Groq (llama-3.1-8b-instant) which is fully free,
+works from India, and produces comparable summary quality. The fallback
+summary worked correctly throughout testing before the AI was wired up,
+which validated that the graceful degradation logic was solid.
+
+**Blockers / what I'm stuck on:**
+Three API issues back to back  OpenAI had no free credits, Gemini 2.0 Flash
+returned limit: 0 regionally even on a fresh account, gemini-1.5-flash-latest
+had the same issue. Resolved by switching to Groq. Each failure was handled
+gracefully by the fallback so the audit flow kept working throughout. Supabase
+insert was failing because the schema SQL had not been run yet 
+fixed by running it in the SQL editor.
+
+**Plan for tomorrow:**
+Day 5  build the /api/lead route, wire up Resend for transactional
+confirmation emails, verify the full lead capture flow saves to the leads
+table with the correct audit_id foreign key, and write the Day 5 DEVLOG entry.

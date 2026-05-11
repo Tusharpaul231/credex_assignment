@@ -1,6 +1,6 @@
 
 import type { Metadata } from "next";
-import SpendForm from "@/components/SpendForm";
+import SpendFormWrapper from "@/components/SpendFormWrapper";
 import { Badge } from "@/components/ui/badge";
 import { Zap, TrendingDown, Share2, ShieldCheck } from "lucide-react";
 
@@ -86,7 +86,7 @@ export default function HomePage() {
 
       {/*Form*/}
       <section className="max-w-3xl mx-auto px-4 pb-12">
-        <SpendForm />
+        <SpendFormWrapper />
       </section>
 
       {/*Feature highlights*/}

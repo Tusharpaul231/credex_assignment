@@ -77,3 +77,20 @@ fixed by running it in the SQL editor.
 Day 5  build the /api/lead route, wire up Resend for transactional
 confirmation emails, verify the full lead capture flow saves to the leads
 table with the correct audit_id foreign key, and write the Day 5 DEVLOG entry.
+
+
+## Day 5 — 2026-05-11
+
+**Hours worked:** 5
+
+**What I did:**  
+Built the `/api/lead` route with email validation, duplicate lead checks, Supabase persistence, and Resend transactional emails. Added personalized email copy based on savings detected and conditional Credex consultation messaging for high-savings users. Also completed a major UI polish pass across the landing page and audit results pages using Tailwind + shadcn/ui components.
+
+**What I learned:**  
+Discovered that `globals.css` was never imported in `layout.tsx`, which caused the entire app to render without styling. Also learned that Tailwind v4 plugin handling differs from v3 removing the invalid `@plugin "tailwindcss-animate"` line fixed the broken CSS pipeline after the shadcn reinitialization.
+
+**Blockers / what I'm stuck on:**  
+Spent a significant amount of time debugging Tailwind CSS issues caused by the missing global stylesheet import and incompatible Tailwind v4 animation plugin configuration.
+
+**Plan for tomorrow:**  
+Complete all remaining documentation files, run Lighthouse audits on the deployed app, improve accessibility/performance scores, and do a final UI cleanup pass.

@@ -94,3 +94,20 @@ Spent a significant amount of time debugging Tailwind CSS issues caused by the m
 
 **Plan for tomorrow:**  
 Complete all remaining documentation files, run Lighthouse audits on the deployed app, improve accessibility/performance scores, and do a final UI cleanup pass.
+
+
+## Day 6 — 2026-05-12
+
+**Hours worked:** 5
+
+**What I did:**  
+Completed a full UI polish and dark mode pass across the application. Fixed multiple visual issues on the landing page and audit results screens, including dark mode contrast problems, ToolRow layout overlap, badge visibility, and HeroSavings readability. Added a ThemeToggle component with localStorage persistence and implemented an inline script in `layout.tsx` to prevent dark mode flash on first load.
+
+**What I learned:**  
+Opacity-based Tailwind colour utilities work much better across light and dark themes than maintaining separate hardcoded colour pairs. Also learned that preventing theme flash in Next.js is best handled with an inline script that sets the `dark` class before hydration.
+
+**Blockers / what I'm stuck on:**  
+Had to debug Tailwind v4 dark mode behavior and ensure the `dark` class was consistently applied to the `html` element for all variants to work correctly.
+
+**Plan for tomorrow:**  
+Final project pass, complete `REFLECTION.md`, finalize documentation, run Lighthouse audits, perform full smoke testing on the deployed app, and prepare the final submission.

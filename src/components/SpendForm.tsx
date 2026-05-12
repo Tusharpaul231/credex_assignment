@@ -15,7 +15,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 import ToolRow from "@/components/ToolRow";
 import { TOOL_DEFINITIONS } from "@/lib/pricingData";
 import { FormInput, ToolInput, ToolKey, UseCaseKey } from "@/types";
@@ -23,11 +29,11 @@ import { FormInput, ToolInput, ToolKey, UseCaseKey } from "@/types";
 const STORAGE_KEY = "aiaudit_form_state";
 
 const USE_CASES: { value: UseCaseKey; label: string }[] = [
-  { value: "coding",   label: "Coding / Engineering" },
-  { value: "writing",  label: "Writing / Content" },
-  { value: "data",     label: "Data / Analytics" },
+  { value: "coding", label: "Coding / Engineering" },
+  { value: "writing", label: "Writing / Content" },
+  { value: "data", label: "Data / Analytics" },
   { value: "research", label: "Research" },
-  { value: "mixed",    label: "Mixed / General" },
+  { value: "mixed", label: "Mixed / General" },
 ];
 
 function makeEmptyRow(): ToolInput {
@@ -48,13 +54,9 @@ const DEFAULT_FORM: FormInput = {
 
 export default function SpendForm() {
   const router = useRouter();
-  //const [form, setForm] = useState<FormInput>(DEFAULT_FORM);
   const [loading, setLoading] = useState(false);
-  //const [hydrated, setHydrated] = useState(false);
 
-  // Load persisted state on mount
   const [form, setForm] = useState<FormInput>(() => {
-    // Only runs on client, so check for window
     if (typeof window === "undefined") return DEFAULT_FORM;
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
@@ -66,23 +68,11 @@ export default function SpendForm() {
     return DEFAULT_FORM;
   });
 
-  /* Persist on every change
-  useEffect(() => {
-    if (!hydrated) return;
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(form));
-    } catch {
-      // Storage full or unavailable silently ignore for now
-    }
-  }, [form, hydrated]);*/
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(form));
     } catch {}
   }, [form]);
-
-
-  // Handlers
 
   function addTool() {
     if (form.tools.length >= 8) {
@@ -93,7 +83,10 @@ export default function SpendForm() {
   }
 
   function removeTool(id: string) {
-    setForm((prev) => ({ ...prev, tools: prev.tools.filter((t) => t.id !== id) }));
+    setForm((prev) => ({
+      ...prev,
+      tools: prev.tools.filter((t) => t.id !== id),
+    }));
   }
 
   function updateTool(id: string, field: keyof ToolInput, value: string | number) {
@@ -103,24 +96,12 @@ export default function SpendForm() {
     }));
   }
 
-  function setTeamSize(val: string) {
-    const n = parseInt(val) || 1;
-    setForm((prev) => ({ ...prev, teamSize: Math.max(1, n) }));
-  }
-
-  function setUseCase(val: UseCaseKey) {
-    setForm((prev) => ({ ...prev, useCase: val }));
-  }
-
-  // Validation
-
   function validate(): string | null {
     if (form.tools.length === 0) return "Add at least one AI tool.";
     for (const t of form.tools) {
       if (!t.tool) return "Please select a tool for every row.";
       if (!t.plan) return "Please select a plan for every row.";
       if (t.seats < 1) return "Seats must be at least 1.";
-      // API / usage-based tools must have a spend entered
       const isUsageBased = t.plan === "payg" || t.plan === "api";
       if (isUsageBased && t.monthlySpend <= 0)
         return `Enter your actual monthly spend for ${t.tool.replace("_", " ")}.`;
@@ -129,16 +110,10 @@ export default function SpendForm() {
     return null;
   }
 
-  // Submit
-
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-
     const err = validate();
-    if (err) {
-      toast.error(err);
-      return;
-    }
+    if (err) { toast.error(err); return; }
 
     setLoading(true);
     try {
@@ -154,7 +129,6 @@ export default function SpendForm() {
       }
 
       const { id } = await res.json();
-      // Clear persisted form after successful submission
       localStorage.removeItem(STORAGE_KEY);
       router.push(`/audit/${id}`);
     } catch (err: unknown) {
@@ -165,12 +139,7 @@ export default function SpendForm() {
     }
   }
 
-  // Compute total for preview
-
   const totalMonthly = form.tools.reduce((sum, t) => sum + (t.monthlySpend || 0), 0);
-
-  // Don't render until localStorage is loaded to avoid hydration flash
-  //if (!hydrated) return null;
 
   return (
     <form onSubmit={handleSubmit} noValidate>
@@ -181,27 +150,25 @@ export default function SpendForm() {
             Your AI Tool Stack
           </CardTitle>
           <CardDescription>
-            Add every AI tool your team pays for. We&apos;ll calculate exactly where
-            you&apos;re overspending and what to do about it.
+            Add every AI tool your team pays for. We&apos;ll calculate exactly
+            where you&apos;re overspending and what to do about it.
           </CardDescription>
         </CardHeader>
 
         <CardContent className="space-y-4">
-          {/* Tool rows */}
-          <div className="space-y-3">
-            {/* Column headers only shown on sm+ */}
-            <div className="hidden sm:grid grid-cols-12 gap-3 px-4">
-              <span className="col-span-3 text-xs font-medium text-muted-foreground">Tool</span>
+          <div className="space-y-2">
+            {/* Column headers */}
+            <div className="hidden sm:grid grid-cols-12 gap-3 px-3">
+              <span className="col-span-4 text-xs font-medium text-muted-foreground">Tool</span>
               <span className="col-span-3 text-xs font-medium text-muted-foreground">Plan</span>
-              <span className="col-span-2 text-xs font-medium text-muted-foreground">Monthly Spend</span>
+              <span className="col-span-2 text-xs font-medium text-muted-foreground">Spend/mo</span>
               <span className="col-span-2 text-xs font-medium text-muted-foreground">Seats</span>
             </div>
 
-            {form.tools.map((row, i) => (
+            {form.tools.map((row) => (
               <ToolRow
                 key={row.id}
                 row={row}
-                index={i}
                 onChange={updateTool}
                 onRemove={removeTool}
                 canRemove={form.tools.length > 1}
@@ -209,7 +176,7 @@ export default function SpendForm() {
             ))}
           </div>
 
-          {/* Add tool button */}
+          {/* Add tool */}
           <Button
             type="button"
             variant="outline"
@@ -231,15 +198,27 @@ export default function SpendForm() {
                 type="number"
                 min={1}
                 value={form.teamSize}
-                onChange={(e) => setTeamSize(e.target.value)}
+                onChange={(e) =>
+                  setForm((prev) => ({
+                    ...prev,
+                    teamSize: Math.max(1, parseInt(e.target.value) || 1),
+                  }))
+                }
                 placeholder="e.g. 5"
               />
-              <p className="text-xs text-muted-foreground">Total people at your company</p>
+              <p className="text-xs text-muted-foreground">
+                Total people at your company
+              </p>
             </div>
 
             <div className="space-y-1.5">
               <Label htmlFor="useCase">Primary use case</Label>
-              <Select value={form.useCase} onValueChange={(v) => setUseCase(v as UseCaseKey)}>
+              <Select
+                value={form.useCase}
+                onValueChange={(v) =>
+                  setForm((prev) => ({ ...prev, useCase: v as UseCaseKey }))
+                }
+              >
                 <SelectTrigger id="useCase">
                   <SelectValue />
                 </SelectTrigger>
@@ -251,11 +230,13 @@ export default function SpendForm() {
                   ))}
                 </SelectContent>
               </Select>
-              <p className="text-xs text-muted-foreground">What your team mainly uses AI for</p>
+              <p className="text-xs text-muted-foreground">
+                What your team mainly uses AI for
+              </p>
             </div>
           </div>
 
-          {/* Honeypot field hidden from real users, catches bots */}
+          {/* Honeypot */}
           <input
             type="text"
             name="_hp_website"
@@ -265,22 +246,16 @@ export default function SpendForm() {
             className="hidden"
           />
 
-          {/* Spend preview + submit */}
+          {/* Submit */}
           <div className="flex items-center justify-between pt-3 border-t border-border">
             <div>
               <p className="text-sm text-muted-foreground">Current monthly spend</p>
               <p className="text-2xl font-bold tabular-nums">
-                ${totalMonthly.toLocaleString("en-US", { minimumFractionDigits: 0 })}
+                ${totalMonthly.toLocaleString()}
                 <span className="text-sm font-normal text-muted-foreground">/mo</span>
               </p>
             </div>
-
-            <Button
-              type="submit"
-              size="lg"
-              disabled={loading}
-              className="min-w-[160px]"
-            >
+            <Button type="submit" size="lg" disabled={loading} className="min-w-[160px]">
               {loading ? (
                 <>
                   <Loader2 size={16} className="mr-2 animate-spin" />

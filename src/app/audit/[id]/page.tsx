@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Zap, ArrowLeft, RotateCcw } from "lucide-react";
 import LeadCapture from "@/components/LeadCapture";
+import ThemeToggle from "@/components/ThemeToggle";
 
 //  Fetch audit by ID 
 async function getAudit(id: string): Promise<AuditRecord | null> {
@@ -104,6 +105,7 @@ export default async function AuditPage({
             AIAudit
           </Link>
           <div className="flex items-center gap-2">
+            <ThemeToggle />
             <Badge variant="secondary" className="text-xs hidden sm:block">
               Free tool by Credex
             </Badge>

@@ -13,8 +13,8 @@ export default function ToolAuditCard({ audit }: ToolAuditCardProps) {
     <div
       className={`rounded-xl border p-5 transition-colors ${
         isOptimal
-          ? "border-emerald-200 bg-emerald-50/50"
-          : "border-orange-200 bg-orange-50/50"
+          ? "border-emerald-500/30 bg-emerald-500/5"
+          : "border-orange-500/30 bg-orange-500/5"
       }`}
     >
       {/* Header */}
@@ -34,7 +34,7 @@ export default function ToolAuditCard({ audit }: ToolAuditCardProps) {
         {audit.savings > 0 && (
           <Badge
             variant="outline"
-            className="border-orange-300 bg-orange-100 text-orange-700 font-semibold whitespace-nowrap"
+            className="bg-orange-500/20 text-orange-400 border border-orange-500/30 font-semibold whitespace-nowrap hover:bg-orange-500/20"
           >
             Save ${audit.savings}/mo
           </Badge>
@@ -43,7 +43,7 @@ export default function ToolAuditCard({ audit }: ToolAuditCardProps) {
         {isOptimal && (
           <Badge
             variant="outline"
-            className="border-emerald-300 bg-emerald-100 text-emerald-700 font-semibold"
+            className="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-semibold hover:bg-emerald-500/20"
           >
             Optimal ✓
           </Badge>
@@ -57,7 +57,7 @@ export default function ToolAuditCard({ audit }: ToolAuditCardProps) {
             ${audit.currentSpend}/mo
           </span>
           <ArrowRight size={14} className="text-muted-foreground" />
-          <span className="bg-emerald-100 text-emerald-800 rounded px-2 py-0.5 font-mono text-xs font-medium">
+          <span className="bg-emerald-500/20 text-emerald-400 rounded px-2 py-0.5 font-mono text-xs font-medium">
             ${(audit.currentSpend - audit.savings).toFixed(0)}/mo
           </span>
           <span className="text-xs text-muted-foreground">→ {audit.recommendedAction}</span>

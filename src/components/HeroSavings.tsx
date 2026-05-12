@@ -34,7 +34,7 @@ export default function HeroSavings({
   }
 
   return (
-    <div className="rounded-2xl bg-gradient-to-br from-primary/90 to-primary p-8 text-white text-center shadow-lg">
+    <div className="rounded-2xl bg-zinc-900 border border-zinc-700 p-8 text-white shadow-xl">
       <div className="flex justify-center mb-3">
         <div className="p-3 rounded-full bg-white/20">
           <TrendingDown className="text-white" size={28} />

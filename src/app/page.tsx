@@ -3,6 +3,7 @@ import Link from "next/link";
 import SpendFormWrapper from "@/components/SpendFormWrapper";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
 import { Badge } from "@/components/ui/badge";
+import ThemeToggle from "@/components/ThemeToggle";
 import {
   Zap,
   TrendingDown,
@@ -38,25 +39,25 @@ export const metadata: Metadata = {
 const FEATURES = [
   {
     icon: <TrendingDown size={20} className="text-emerald-600" />,
-    bg: "bg-emerald-50",
+    bg: "bg-emerald-100 dark:bg-emerald-900/40",
     title: "Instant savings estimate",
     desc: "See exactly how much you could save — per tool, per month, per year.",
   },
   {
     icon: <Zap size={20} className="text-violet-600" />,
-    bg: "bg-violet-50",
+    bg: "bg-violet-50 dark:bg-emerald-900/40",
     title: "Smart recommendations",
     desc: "Right-size plans, remove overlapping tools, find cheaper alternatives.",
   },
   {
     icon: <Share2 size={20} className="text-blue-600" />,
-    bg: "bg-blue-50",
+    bg: "bg-blue-50 dark:bg-emerald-900/40",
     title: "Shareable report",
     desc: "Get a unique URL to share your audit with your team or investors.",
   },
   {
     icon: <ShieldCheck size={20} className="text-orange-600" />,
-    bg: "bg-orange-50",
+    bg: "bg-orange-50 dark:bg-emerald-900/40",
     title: "No login required",
     desc: "Just fill in your tools and get your report. Email optional, always after.",
   },
@@ -80,6 +81,7 @@ export default function HomePage() {
             AIAudit
           </div>
           <div className="flex items-center gap-3">
+            <ThemeToggle />
             <Badge
               variant="outline"
               className="text-xs hidden sm:block border-emerald-300 text-emerald-700 bg-emerald-50"
@@ -123,7 +125,7 @@ export default function HomePage() {
             <br />
             <span className="relative">
               <span className="relative z-10">AI tools.</span>
-              <span className="absolute inset-x-0 bottom-1 h-3 bg-yellow-200 -z-0 rounded" />
+              <span className="absolute left-0 right-0 bottom-1 h-3 bg-yellow-400 dark:bg-yellow-500 opacity-70 -z-0 rounded" />
             </span>
           </h1>
 
@@ -197,7 +199,7 @@ export default function HomePage() {
               },
             ].map((item) => (
               <div key={item.step} className="relative">
-                <div className="text-5xl font-black text-muted/40 mb-3 leading-none">
+                <div className="text-5xl font-black mb-3 leading-none text-foreground/20 dark:text-foreground/25 select-none">
                   {item.step}
                 </div>
                 <h3 className="font-semibold text-foreground mb-2">{item.title}</h3>
@@ -246,6 +248,7 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── Footer ───────────────────────────────────────────── */}
       <footer className="border-t border-border bg-muted/20">
         <div className="max-w-5xl mx-auto px-4 py-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm text-muted-foreground">
           <div className="flex items-center gap-2">

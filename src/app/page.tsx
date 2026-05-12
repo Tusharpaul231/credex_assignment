@@ -9,7 +9,6 @@ import {
   TrendingDown,
   Share2,
   ShieldCheck,
-  ArrowRight,
   CheckCircle2,
 } from "lucide-react";
 

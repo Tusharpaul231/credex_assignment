@@ -11,7 +11,7 @@ export default function ThemeToggle() {
     // On mount, check localStorage or default to dark
     const stored = localStorage.getItem("theme");
     const dark = stored ? stored === "dark" : true;
-    setIsDark(dark);
+    //setIsDark(dark);
     document.documentElement.classList.toggle("dark", dark);
   }, []);
 

@@ -12,6 +12,12 @@ Built for the Credex AI Spend Optimizer assignment.
 
 ---
 
+## Live Demo
+
+https://credex-assignment-five.vercel.app
+
+---
+
 ## Tech Stack
 
 - Next.js 14 (App Router)
@@ -43,3 +49,48 @@ Install dependencies:
 
 ```bash
 npm install
+
+Create a .env.local file in the root directory:
+
+```bash
+OPENAI_API_KEY=
+SUPABASE_URL=
+SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+RESEND_API_KEY=
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+
+Run the development server:
+
+```bash
+npm run dev
+
+Open the app:
+
+```bash
+http://localhost:3000
+
+Running tests:
+
+```bash
+npm run test
+
+---
+
+## Screenshots
+
+![Screenshot](screenshots/screenshot1.png)
+
+![Screenshot](screenshots/screenshot2.png)
+
+![Screenshot](screenshots/screenshot3.png)
+
+![Screenshot](screenshots/screenshot4.png)
+
+![Screenshot](screenshots/screenshot5.png)
+
+---
+
+## Lighthouse
+
+![lighthouse](screenshots/lighthouse.png)

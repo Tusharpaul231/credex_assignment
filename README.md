@@ -49,6 +49,7 @@ Install dependencies:
 
 ```bash
 npm install
+```
 
 Create a .env.local file in the root directory:
 
@@ -59,21 +60,25 @@ SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=
 RESEND_API_KEY=
 NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
 
 Run the development server:
 
 ```bash
 npm run dev
+```
 
 Open the app:
 
 ```bash
 http://localhost:3000
+```
 
 Running tests:
 
 ```bash
 npm run test
+```
 
 ---
 

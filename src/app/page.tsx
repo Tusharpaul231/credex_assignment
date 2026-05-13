@@ -16,11 +16,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"
   ),
-  title: "AIAudit — Free AI Spend Audit for Startups",
+  title: "AIAudit The Free AI Spend Audit for Startups",
   description:
     "Find out exactly where your team is overspending on AI tools. Free instant audit. No login required.",
   openGraph: {
-    title: "AIAudit — Free AI Spend Audit for Startups",
+    title: "AIAudit The Free AI Spend Audit for Startups",
     description:
       "Find out exactly where your team is overspending on AI tools. Free instant audit. No login required.",
     type: "website",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AIAudit — Free AI Spend Audit for Startups",
+    title: "AIAudit The Free AI Spend Audit for Startups",
     description:
       "Find out exactly where your team is overspending on AI tools.",
     images: ["/og-default.png"],
@@ -40,7 +40,7 @@ const FEATURES = [
     icon: <TrendingDown size={20} className="text-emerald-600" />,
     bg: "bg-emerald-100 dark:bg-emerald-900/40",
     title: "Instant savings estimate",
-    desc: "See exactly how much you could save — per tool, per month, per year.",
+    desc: "See exactly how much you could save per tool, per month, per year.",
   },
   {
     icon: <Zap size={20} className="text-violet-600" />,
@@ -129,7 +129,7 @@ export default function HomePage() {
           </h1>
 
           <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed">
-            Enter your AI subscriptions and get an instant audit — where
+            Enter your AI subscriptions and get an instant audit that where
             you&apos;re overspending, what to switch, and your total potential
             savings. Takes 2 minutes.
           </p>
@@ -184,7 +184,7 @@ export default function HomePage() {
               {
                 step: "01",
                 title: "Enter your stack",
-                desc: "Add every AI tool your team pays for — plan, monthly spend, number of seats.",
+                desc: "Add every AI tool your team pays for like plan, monthly spend, number of seats.",
               },
               {
                 step: "02",
